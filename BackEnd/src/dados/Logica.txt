@@ -1,0 +1,143 @@
+
+Sempre que receber um requisito, faça este exercício:
+
+Ler o requisito
+Receber a informação sobre qual dado foi escolhido.
+
+↓
+
+Destacar os verbos
+GET => Receber a informação sobre qual dado foi escolhido.
+↓
+
+Transformar cada verbo em uma ação do sistema
+    recebe requição do dado escolhido 
+    Muda para rota do dado escolhido
+
+
+
+↓
+
+Organizar as ações em uma sequência lógica
+
+↓
+
+Implementar essa sequência no Service
+
+
+VERBOS HTTP: 
+
+Quero apenas consultar informações? → GET
+Quero criar algo novo ou executar uma ação? → POST
+Quero substituir completamente um recurso? → PUT
+Quero alterar apenas alguns campos? → PATCH
+Quero remover um recurso? → DELETE
+
+DIFERENCIAR FUNCIONALIDADE DE FRONT E BACKEND
+
+Pergunta	Responsável
+O usuário vê isso na tela?	Frontend
+O usuário clica ou digita?	Frontend
+Existe um botão?	Frontend
+Existe uma rota HTTP?	Backend
+Existe validação de regras?	Backend
+Existe cálculo?	Backend
+Existe comunicação com banco?	Backend
+Existe resposta da API?	Backend
+
+
+Construção do raciocinio logico: 
+
+Funcinalidade backend: 
+
+Disponibilizar uma rota para receber a solicitação de rolagem enviada pelo front-end.
+ Receber a informação sobre qual dado foi escolhido.
+ Validar se o modelo de dado informado é permitido pela aplicação.
+ Gerar um número aleatório dentro do intervalo válido do dado selecionado.
+ Retornar ao front-end o resultado da rolagem.
+ Manter uma estrutura de código clara e adequada para a solução proposta.
+
+
+ Jornada do usuario no sistema:
+
+inicio 
+1- Escolhe o botao do Dado desejado ( Front : Usario ) 
+2. Receber a informação sobre qual dado foi escolhido (backend : service )
+3. Disponibilizar uma rota para receber a solicitação de rolagem enviada pelo front-end. ( backend:Service)
+3. Clicar em botao "Rolar dado" para solicitar rolagem (Front: usuario)
+4. Receber pedido de rolagem do dado (Backend: service)
+5. Retornar numero aleatorio de lado do dado escolido( Backend: service)
+
+Fim
+
+┌──────────────────────────────┐
+│        Usuário acessa        │
+│          a aplicação         │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Frontend exibe os dados      │
+│ D4 • D6 • D20                │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Usuário seleciona um dado    │
+│ Ex.: D20                     │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Usuário clica em "Rolar"     │
+└──────────────┬───────────────┘
+               │
+               │ POST /dice/roll
+               ▼
+══════════════════════════════════════
+             BACKEND
+══════════════════════════════════════
+               │
+               ▼
+┌──────────────────────────────┐
+│ Receber o tipo do dado       │
+│ D20                          │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Validar                      │
+│ D20 é permitido?             │
+└──────────────┬───────────────┘
+         Sim   │        Não
+               │
+               ▼
+┌──────────────────────────────┐
+│ Gerar número aleatório       │
+│ entre 1 e 20                 │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Retornar JSON                │
+│ {                            │
+│   dice: "D20",               │
+│   result: 17                 │
+│ }                            │
+└──────────────┬───────────────┘
+               │
+══════════════════════════════════════
+            FRONTEND
+══════════════════════════════════════
+               │
+               ▼
+┌──────────────────────────────┐
+│ Receber resposta da API      │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Exibir o resultado           │
+│ "Você rolou um D20"          │
+│ "Resultado: 17"              │
+└──────────────────────────────┘
